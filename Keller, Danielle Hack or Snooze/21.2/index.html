@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<!-- Hack or Snooze
+
+     This is the only HTML page; the applications manipulates this DOM
+     during use.
+
+     Primary authors:
+     - Michael Hueter: initial creation, 2018
+     - Elie Schoppik: refactoring using OO, 2019
+     - Joel Burton: refactored and componentized, 2020
+     - Danielle Keller: original author, 2024
+  -->
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Hack or Snooze is a platform for sharing and discovering stories.">
+  <title>Hack or Snooze</title>
+  <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous">
+  <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/user.css">
+  <link rel="stylesheet" href="css/stories.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+
+<!-- top navigation bar -->
+<nav>
+  <div class="navbar-brand">
+    <a class="nav-link" href="#" id="nav-all" aria-label="All Stories">Hack or Snooze</a>
+  </div>
+  <div class="main-nav-links hidden">
+    |
+    <a class="nav-link" href="#" id="nav-submit-story" aria-label="Submit Story">submit</a>
+    |
+    <a class="nav-link" href="#" id="nav-favorites" aria-label="Favorites">favorites</a>
+    |
+    <a class="nav-link" href="#" id="nav-my-stories" aria-label="My Stories">my&nbsp;stories</a>
+  </div>
+  <div class="nav-right">
+    <a class="nav-link" href="#" id="nav-login" aria-label="Login or Signup">login/signup</a>
+    <a class="nav-link" href="#" id="nav-user-profile" aria-label="User Profile"></a>
+    <a class="hidden" id="nav-logout" href="#" aria-label="Logout"><small>(logout)</small></a>
+  </div>
+</nav>
+
+<!-- area for stories (all stories, user stories, favorites) -->
+<main id="stories-container" class="stories-container container">
+
+  <!-- form for submitted new story -->
+  <form action="" class="hidden" id="submit-form">
+    <fieldset>
+      <legend>Submit a New Story</legend>
+      <div>
+        <label for="create-author">author</label>
+        <input id="create-author" required aria-label="Author Name" placeholder="author name">
+      </div>
+      <div>
+        <label for="create-title">title</label>
+        <input id="create-title" required minlength="3" aria-label="Story Title" placeholder="story title">
+      </div>
+      <div>
+        <label for="create-url">url</label>
+        <input id="create-url" required type="url" aria-label="Story URL" placeholder="story url">
+      </div>
+      <button type="submit">submit</button>
+    </fieldset>
+    <hr>
+  </form>
+
+  <!-- loading message (removed by JS after stories loaded) -->
+  <div id="stories-loading-msg">Loading&hellip;</div>
+
+  <!-- List of all stories -->
+  <ol id="all-stories-list" class="stories-list"></ol>
+
+  <!-- List of stories favorited by the user -->
+  <ol id="favorited-stories" class="hidden stories-list"></ol>
+
+  <!-- List of stories by the user -->
+  <ol id="my-stories" class="hidden stories-list"></ol>
+
+</main>
+
+<!-- Login and signup forms -->
+<section class="account-forms-container container">
+
+  <!-- Login form -->
+  <form action="#" id="login-form" class="account-form hidden" method="post">
+    <fieldset>
+      <legend>Login</legend>
+      <div class="login-input">
+        <label for="login-username">username</label>
+        <input id="login-username" required aria-label="Username" autocomplete="current-username">
+      </div>
+      <div class="login-input">
+        <label for="login-password">password</label>
+        <input id="login-password" required type="password" aria-label="Password" autocomplete="current-password">
+      </div>
+      <button type="submit">login</button>
+      <hr>
+    </fieldset>
+  </form>
+
+  <!-- Signup form -->
+  <form
+      action="#"
+      id="signup-form"
+      class="account-form hidden"
+      method="post">
+    <fieldset>
+      <legend>Create Account</legend>
+      <div class="login-input">
+        <label for="signup-name">name</label>
+        <input id="signup-name" required aria-label="Name" autocapitalize="words">
+      </div>
+      <div class="login-input">
+        <label for="signup-username">username</label>
+        <input id="signup-username" required minlength="3" aria-label="Username" autocomplete="new-username">
+      </div>
+      <div class="login-input">
+        <label for="signup-password">password</label>
+        <input id="signup-password" required minlength="6" aria-label="Password" autocomplete="new-password" type="password">
+      </div>
+      <button type="submit">create account</button>
+    </fieldset>
+  </form>
+</section>
+
+<!-- User profile -->
+<section id="user-profile" class="hidden">
+  <div class="user-profile-box container">
+    <h4>User Profile Info</h4>
+    <section>
+      <div>Name: <span id="profile-name">Name:</span></div>
+      <div>Username: <span id="profile-username">Username:</span></div>
+      <div>Account Created: <span id="profile-account-date"></span></div>
+    </section>
+  </div>
+</section>
+
+<!-- Library JS & our JS -->
+<script src="https://unpkg.com/jquery"></script>
+<script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+<script src="js/models.js"></script>
+<script src="js/main.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/user.js"></script>
+<script src="js/stories.js"></script>
+
+</body>
+</html>
